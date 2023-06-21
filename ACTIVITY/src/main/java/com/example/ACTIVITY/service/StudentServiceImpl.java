@@ -15,39 +15,40 @@ public class StudentServiceImpl implements StudentService {
     private StudentRepository studentRepository;
 
     @Override
-    public Student saveStudent(Student student) {
+    public Student SaveStudent(Student student) {
         return studentRepository.save(student);
     }
 
     @Override
-    public Student FindByID(long id) {
-        Optional<Student> optionalStudent = studentRepository.findById(id);
-        return optionalStudent.orElseThrow(() -> new NoSuchElementException("No student found wth ID:" + id));
-    }
-    @Override
-    public List<Student> FindAll () {
-            return (List<Student>) studentRepository.findAll();
+    public List<Student> FindAllStudents () {
+        return (List<Student>) studentRepository.findAll();
     }
 
     @Override
-    public void deleteStudent(long id){
+    public Student FindByID(int id) {
+        Optional<Student> optionalStudent = studentRepository.findById(id);
+        return optionalStudent.orElseThrow(() -> new NoSuchElementException("No student found wth ID:" + id));
+    }
+
+    @Override
+    public void DeleteStudent(int id){
             Optional<Student> optionalStudent = studentRepository.findById(id);
-            Student studentToDelete = optionalStudent.orElseThrow(()-> new NoSuchElementException("No student found wth ID:" + id));
+            Student studentToDelete = optionalStudent.orElseThrow(()-> new NoSuchElementException(id + "Does not exits"));
             studentRepository.delete(studentToDelete);
     }
 
     @Override
-    public Student updateStudent(long id, Student updatestudent){
+    public Student UpdateStudent(int id, Student updatestudent){
         Optional<Student> optionalStudent = studentRepository.findById(id);
-        Student stid = optionalStudent.orElseThrow(()-> new NoSuchElementException("No student found wth ID:" + id));
-        stid.setName(updatestudent.getName());
-        stid.setAge(updatestudent.getAge());
-        stid.setGrade(updatestudent.getGrade());
-        return studentRepository.save(stid);
+        Student id1 = optionalStudent.orElseThrow(()-> new NoSuchElementException("No student found wth ID:" + id));
+        id1.setName(updatestudent.getName());
+        id1.setAge(updatestudent.getAge());
+        id1.setYear_level(updatestudent.getYear_level());
+        return studentRepository.save(id1);
     }
 
     @Override
-    public Optional<Object> findByName(String name) {
+    public Optional<Object> FindByName(String name) {
         return studentRepository.findByName(name);
     }
 }

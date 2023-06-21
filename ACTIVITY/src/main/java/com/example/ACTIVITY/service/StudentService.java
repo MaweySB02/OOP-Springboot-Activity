@@ -4,12 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 public interface StudentService {
-    public Student saveStudent(Student student);
-    public List<Student> FindAll();
-    public Student FindByID(long id);
+    public Student SaveStudent(Student student);
+    public List<Student> FindAllStudents();
+    public Student FindByID(int id);
 
-    public void deleteStudent(long id);
-    public Student updateStudent(long id, Student updatedStudent);
-    Optional<Object> findByName(String name);
+    public void DeleteStudent(int id);
+    public Student UpdateStudent(int id, Student updatedStudent);
+    Optional<Object> FindByName(String name);
 
 }
